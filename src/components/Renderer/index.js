@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import SlateRenderer from 'slate-fast-renderer'
 import { Paragraph, Heading, Box, Anchor, Image } from 'grommet';
+import styled from 'styled-components'
+
+const withPreWrap = component => styled(component)`
+  white-space: pre-wrap;
+`
+
+const PreWrappedParagraph = withPreWrap(Paragraph)
+const PreWrappedBox = withPreWrap(Box)
 
 export default class Renderer extends Component {
   renderNode = (props, editor, next) => {
@@ -9,9 +17,9 @@ export default class Renderer extends Component {
 
     switch (node.type) {
       case 'paragraph':
-        return <Paragraph {...attributes}>{children}</Paragraph>
+        return <PreWrappedParagraph {...attributes}>{children}</PreWrappedParagraph>
       case 'block-quote':
-        return <Box background='light-2' pad='small' {...attributes}>{children}</Box>
+        return <PreWrappedBox background='light-2' pad='small' {...attributes}>{children}</PreWrappedBox>
       case 'bulleted-list':
         return <ul {...attributes}>{children}</ul>
       case 'heading-one':

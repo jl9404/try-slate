@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Value, Block } from 'slate'
+import SoftBreak from 'slate-soft-break'
 import { Grommet, grommet, Box } from 'grommet'
 import { deepMerge } from "grommet/utils";
 
@@ -15,6 +16,10 @@ const theme = deepMerge(grommet, {
     }
   }
 });
+
+const plugins = [
+  SoftBreak({ shift: true })
+]
 
 const schema = {
   document: {
@@ -48,7 +53,7 @@ class App extends Component {
     return (
       <>
         <div className="cell">
-          <Editor initialValue={Value.fromJSON(initialValue)} onChange={this.setValue} schema={schema} />
+          <Editor initialValue={Value.fromJSON(initialValue)} onChange={this.setValue} schema={schema} plugins={plugins} />
         </div>
         <div className="cell">
           <Grommet theme={theme}>

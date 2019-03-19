@@ -228,7 +228,12 @@ export default class Editor extends Component {
           )
           .wrapBlock(type)
       } else {
-        editor.setBlocks('list-item').wrapBlock(type)
+        value.blocks.forEach(node => {
+          node.nodes.forEach(({ key }) => {
+            editor.wrapBlockByKey(key, type);
+            editor.wrapBlockByKey(key, 'list-item');
+          })
+        })
       }
     }
   }
